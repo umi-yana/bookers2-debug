@@ -4,8 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :books
+  has_many :books, dependent: :destroy
   attachment :profile_image, destroy: false
+   validates :name, length: {in: 2..20}, uniqueness: true
+   validates :introduction, presence: true
 
-  # validates :name, length: {in: 2..20}, uniqueness: true
 end
